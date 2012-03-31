@@ -1,1 +1,1 @@
-<?php echo $this->element('Orders/item', array('item_number'=>$item_number));
+<?php echo $this->element('Orders/item', array('item_number'=>$item_number,'js'=>$this->Js, 'ui'=>$this->Ui));

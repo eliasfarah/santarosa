@@ -28,7 +28,7 @@ class OrdersController extends AppController {
 		if (!$this->Order->exists()) {
 			throw new NotFoundException(__('Invalid order'));
 		}
-		$this->set('order', $this->Order->read(null, $id));
+		$this->set('order', $this->Order->find('first', array('contain'=>array('Customer','Stock'=>array('Color','Product'=>array('ProductType'))),'conditions'=>array('Order.id'=>$id))));
 	}
 
 /**
@@ -58,25 +58,25 @@ class OrdersController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
-                $this->Session->write('item_number', -1);
-		$this->Order->id = $id;
-		if (!$this->Order->exists()) {
-			throw new NotFoundException(__('Invalid order'));
-		}
-		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Order->save($this->request->data)) {
-				$this->Session->setFlash(__('The order has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The order could not be saved. Please, try again.'));
-			}
-		} else {
-			$this->request->data = $this->Order->read(null, $id);
-		}
-		$customers = $this->Order->Customer->find('list');
-		$this->set(compact('customers', 'stocks'));
-	}
+//	public function edit($id = null) {
+//                $this->Session->write('item_number', -1);
+//		$this->Order->id = $id;
+//		if (!$this->Order->exists()) {
+//			throw new NotFoundException(__('Invalid order'));
+//		}
+//		if ($this->request->is('post') || $this->request->is('put')) {
+//			if ($this->Order->save($this->request->data)) {
+//				$this->Session->setFlash(__('The order has been saved'));
+//				$this->redirect(array('action' => 'index'));
+//			} else {
+//				$this->Session->setFlash(__('The order could not be saved. Please, try again.'));
+//			}
+//		} else {
+//			$this->request->data = $this->Order->read(null, $id);
+//		}
+//		$customers = $this->Order->Customer->find('list');
+//		$this->set(compact('customers', 'stocks'));
+//	}
 
 /**
  * delete method

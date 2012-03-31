@@ -1,42 +1,22 @@
+<?php echo $this->Paginator->options(array('url' => $args)); ?>
 <div class="customers index">
 	<h2><?php echo __('Customers');?></h2>
+        <?php echo $this->Form->create(false) ?>
+            <?php echo $this->Form->input('search', array('value'=>empty($args['search'])?null:$args['search'])) ?>
+        <?php echo $this->Form->end('Buscar') ?>
 	<table cellpadding="0" cellspacing="0">
-	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
+	<tr>		
 			<th><?php echo $this->Paginator->sort('nome');?></th>
-			<th><?php echo $this->Paginator->sort('data_nascimento');?></th>
-			<th><?php echo $this->Paginator->sort('endereco');?></th>
-			<th><?php echo $this->Paginator->sort('numero');?></th>
-			<th><?php echo $this->Paginator->sort('complemento');?></th>
-			<th><?php echo $this->Paginator->sort('bairro');?></th>
-			<th><?php echo $this->Paginator->sort('cidade');?></th>
-			<th><?php echo $this->Paginator->sort('estado');?></th>
 			<th><?php echo $this->Paginator->sort('telefone_residencial');?></th>
-			<th><?php echo $this->Paginator->sort('telefone_comercial');?></th>
-			<th><?php echo $this->Paginator->sort('celular');?></th>
-			<th><?php echo $this->Paginator->sort('observacoes');?></th>
-			<th><?php echo $this->Paginator->sort('created');?></th>
-			<th><?php echo $this->Paginator->sort('modified');?></th>
+			<th><?php echo $this->Paginator->sort('celular');?></th>	
 			<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
 	<?php
 	foreach ($customers as $customer): ?>
 	<tr>
-		<td><?php echo h($customer['Customer']['id']); ?>&nbsp;</td>
 		<td><?php echo h($customer['Customer']['nome']); ?>&nbsp;</td>
-		<td><?php echo h($customer['Customer']['data_nascimento']); ?>&nbsp;</td>
-		<td><?php echo h($customer['Customer']['endereco']); ?>&nbsp;</td>
-		<td><?php echo h($customer['Customer']['numero']); ?>&nbsp;</td>
-		<td><?php echo h($customer['Customer']['complemento']); ?>&nbsp;</td>
-		<td><?php echo h($customer['Customer']['bairro']); ?>&nbsp;</td>
-		<td><?php echo h($customer['Customer']['cidade']); ?>&nbsp;</td>
-		<td><?php echo h($customer['Customer']['estado']); ?>&nbsp;</td>
 		<td><?php echo h($customer['Customer']['telefone_residencial']); ?>&nbsp;</td>
-		<td><?php echo h($customer['Customer']['telefone_comercial']); ?>&nbsp;</td>
 		<td><?php echo h($customer['Customer']['celular']); ?>&nbsp;</td>
-		<td><?php echo h($customer['Customer']['observacoes']); ?>&nbsp;</td>
-		<td><?php echo h($customer['Customer']['created']); ?>&nbsp;</td>
-		<td><?php echo h($customer['Customer']['modified']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $customer['Customer']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $customer['Customer']['id'])); ?>

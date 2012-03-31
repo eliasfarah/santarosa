@@ -1,25 +1,21 @@
 <div class="orders index">
 	<h2><?php echo __('Orders');?></h2>
 	<table cellpadding="0" cellspacing="0">
-	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('customer_id');?></th>
+	<tr>			
+			<th><?php echo $this->Paginator->sort('Customer.nome','Customer');?></th>
 			<th><?php echo $this->Paginator->sort('data_hora');?></th>
 			<th><?php echo $this->Paginator->sort('total');?></th>
 			<th><?php echo $this->Paginator->sort('desconto');?></th>
 			<th><?php echo $this->Paginator->sort('subtotal');?></th>
 			<th><?php echo $this->Paginator->sort('acrescimo');?></th>
 			<th><?php echo $this->Paginator->sort('entregue');?></th>
-			<th><?php echo $this->Paginator->sort('created');?></th>
-			<th><?php echo $this->Paginator->sort('modified');?></th>
 			<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
 	<?php
 	foreach ($orders as $order): ?>
 	<tr>
-		<td><?php echo h($order['Order']['id']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($order['Customer']['id'], array('controller' => 'customers', 'action' => 'view', $order['Customer']['id'])); ?>
+			<?php echo $this->Html->link($order['Customer']['nome'], array('controller' => 'customers', 'action' => 'view', $order['Customer']['id'])); ?>
 		</td>
 		<td><?php echo h($order['Order']['data_hora']); ?>&nbsp;</td>
 		<td><?php echo h($order['Order']['total']); ?>&nbsp;</td>
@@ -27,8 +23,6 @@
 		<td><?php echo h($order['Order']['subtotal']); ?>&nbsp;</td>
 		<td><?php echo h($order['Order']['acrescimo']); ?>&nbsp;</td>
 		<td><?php echo h($order['Order']['entregue']); ?>&nbsp;</td>
-		<td><?php echo h($order['Order']['created']); ?>&nbsp;</td>
-		<td><?php echo h($order['Order']['modified']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $order['Order']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $order['Order']['id'])); ?>

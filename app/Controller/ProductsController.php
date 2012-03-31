@@ -47,8 +47,8 @@ class ProductsController extends AppController {
 				$this->Session->setFlash(__('The product could not be saved. Please, try again.'));
 			}
 		}
-		$manufacturers = $this->Product->Manufacturer->find('list');
-		$productTypes = $this->Product->ProductType->find('list');
+		$manufacturers = $this->Product->Manufacturer->find('list', array('fields'=>array('Manufacturer.id','Manufacturer.nome')));
+		$productTypes = $this->Product->ProductType->find('list', array('fields'=>array('ProductType.id','ProductType.tipo')));
 		$this->set(compact('manufacturers', 'productTypes'));
 	}
 

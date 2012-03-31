@@ -9,7 +9,6 @@ App::uses('AppModel', 'Model');
 class Stock extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
 /**
  * belongsTo associations
  *
@@ -29,8 +28,14 @@ class Stock extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+                'ProductType' => array(
+			'className' => 'ProductType',
+			'foreignKey' => false,
+			'conditions' => 'ProductType.id = Product.product_type_id'
 		)
 	);
         
         public $hasAndBelongsToMany = array('Order');
+        
 }

@@ -35,7 +35,7 @@ class CustomersControllerTestCase extends CakeTestCase {
  *
  * @var array
  */
-	public $fixtures = array('app.customer', 'app.order');
+	public $fixtures = array('app.customer', 'app.order', 'app.stock', 'app.product', 'app.manufacturer', 'app.product_type', 'app.color', 'app.orders_stock');
 
 /**
  * setUp method

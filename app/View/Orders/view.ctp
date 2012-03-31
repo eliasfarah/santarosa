@@ -8,7 +8,7 @@
 		</dd>
 		<dt><?php echo __('Customer'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($order['Customer']['id'], array('controller' => 'customers', 'action' => 'view', $order['Customer']['id'])); ?>
+			<?php echo $this->Html->link($order['Customer']['nome'], array('controller' => 'customers', 'action' => 'view', $order['Customer']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Data Hora'); ?></dt>
@@ -71,24 +71,20 @@
 	<?php if (!empty($order['Stock'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Product Id'); ?></th>
-		<th><?php echo __('Qtd'); ?></th>
-		<th><?php echo __('Color Id'); ?></th>
-		<th><?php echo __('Created'); ?></th>
-		<th><?php echo __('Modified'); ?></th>
+		<th><?php echo __('Product'); ?></th>		
+		<th><?php echo __('Color'); ?></th>
+                <th><?php echo __('Qtd'); ?></th>
+		<th><?php echo __('SubTotal'); ?></th>                
 		<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
 	<?php
 		$i = 0;
 		foreach ($order['Stock'] as $stock): ?>
 		<tr>
-			<td><?php echo $stock['id'];?></td>
-			<td><?php echo $stock['product_id'];?></td>
-			<td><?php echo $stock['qtd'];?></td>
-			<td><?php echo $stock['color_id'];?></td>
-			<td><?php echo $stock['created'];?></td>
-			<td><?php echo $stock['modified'];?></td>
+                        <td><?php echo $this->Html->link($stock['Product']['ProductType']['tipo'].' '.$stock['Product']['nome'], array('controller' => 'stocks', 'action' => 'view', $stock['id'])); ?></td>			
+			<td><?php echo $stock['Color']['cor'];?></td>
+			<td><?php echo $stock['OrdersStock']['qtd'];?></td>
+                        <td>R$ <?php echo $stock['OrdersStock']['qtd']*$stock['OrdersStock']['valor'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'stocks', 'action' => 'view', $stock['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'stocks', 'action' => 'edit', $stock['id'])); ?>

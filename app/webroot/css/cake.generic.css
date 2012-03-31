@@ -316,6 +316,11 @@ input, textarea {
 	padding: 1%;
 	width:98%;
 }
+
+input[type=number] {
+    width: 200px !important;
+}
+
 select {
 	clear: both;
 	font-size: 120%;

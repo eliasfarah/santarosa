@@ -101,4 +101,30 @@ class StocksController extends AppController {
         $this->redirect(array('action' => 'index'));
     }
 
+//    public function stocks_ajax(){
+//     
+//        debug($this->request->query);        
+//        
+//	$this->autoRender = false;
+//        $stocks = $this->Stock->find('all', array('conditions'=>array('Product.nome ilike'=>'%'.$this->request->query['term'].'%' )));
+//	echo json_encode($this->Stock->autoComplete_encode($stocks));
+//    }    
+
+    function stocks_ajax()
+    {
+        $this->layout = 'ajax';
+        $this->autoRender = false;
+        $this->disableCache = true;
+                              
+        $stocks = $this->Stock->find('all', array('limit'=>'15',
+                                                  'order'=>array('Product.nome'=> 'ASC'),
+                                                  'conditions'=> array('OR'=>array('Product.nome ilike'=>'%'.$this->request->query['term'].'%',
+                                                                                   'ProductType.tipo ilike'=>'%'.$this->request->query['term'].'%'))
+                                                 ));
+        $json = array();
+        foreach ($stocks as $stock):
+            $json[] = array('id'=>$stock['Stock']['id'], 'value'=>$stock['ProductType']['tipo'].' '.$stock['Product']['nome'].' '.$stock['Color']['cor']."(".$stock['Stock']['qtd'].")", 'label'=>$stock['ProductType']['tipo'].' '.$stock['Product']['nome'].' '.$stock['Color']['cor']."(".$stock['Stock']['qtd'].")", 'valor'=>$stock['Product']['valor'], 'qtd'=>$stock['Stock']['qtd']);
+        endforeach;
+        echo json_encode($json);
+    }       
 }
