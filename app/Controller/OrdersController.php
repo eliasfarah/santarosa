@@ -6,7 +6,7 @@ App::uses('AppController', 'Controller');
  * @property Order $Order
  */
 class OrdersController extends AppController {
-    
+    public $uses = array('Order', 'Template');
 /**
  * index method
  *
@@ -110,5 +110,36 @@ class OrdersController extends AppController {
             $item_number = $this->Session->read('item_number');
             $stocks = $this->Order->Stock->find('list');
             $this->set(compact('item_number', 'stocks'));                       
+        }
+        
+        public function print_order($id =null)
+        {
+            $this->layout = 'ajax';
+            $this->Order->id = $id;
+		if (!$this->Order->exists()) {
+			throw new NotFoundException(__('Invalid order'));
+		}
+		$order = $this->Order->find('first', array('contain'=>array('Customer','Stock'=>array('Color','Product'=>array('Manufacturer','ProductType'))),'conditions'=>array('Order.id'=>$id)));
+//                debug($order);
+                $this->set('order', $order);
+                
+                $template = $this->Template->find('first', array('conditions' => array('Template.nome' => 'Pedidos')));
+                $template = $template['Template']['template'];
+                $template = str_replace('[DATA]', date('d/m/Y'), $template);
+                $template = str_replace('[NOME]', $order['Customer']['nome'], $template);
+                $template = str_replace('[ENDERECO]', $order['Customer']['endereco'].", ".$order['Customer']['numero'], $template);
+                $template = str_replace('[COMPLEMENTO]', $order['Customer']['complemento'], $template);
+                $template = str_replace('[BAIRRO]', $order['Customer']['bairro'], $template);
+                $template = str_replace('[CIDADE]', $order['Customer']['cidade'], $template);
+                $template = str_replace('[ESTADO]', $order['Customer']['estado'], $template);
+                $template = str_replace('[TEL_RES]', $order['Customer']['telefone_residencial'], $template);
+                $template = str_replace('[TEL_COM]', $order['Customer']['telefone_comercial'], $template);
+                $template = str_replace('[CELULAR]', $order['Customer']['celular'], $template);
+                $template = str_replace('[OBS]', $order['Customer']['observacoes'], $template);
+
+                $this->set('template', $template);
+                
+                
+                
         }
 }

@@ -10,9 +10,10 @@
         ?>
                 <div id="items"></div>
         <?php
-                echo $this->Form->input('Order.desconto');
-		echo $this->Form->input('Order.acrescimo');
-                echo $this->Form->input('Order.subtotal');
+                echo $this->Form->input('Order.desconto', array('value'=>'0.00'));
+		echo $this->Form->input('Order.acrescimo', array('value'=>'0.00'));
+                echo $this->Form->input('Order.subtotal', array('value'=>'0.00', 'readonly'=>'readonly'));
+                echo $this->Form->input('Order.total', array('value'=>'0.00', 'readonly'=>'readonly'));
 	?>
 	</fieldset>
 

@@ -64,6 +64,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                     <div class="dock-container">  
                         <a class="dock-item" href="/dashboard/index"><span>Principal</span><?php echo $this->Html->image('dock/home.png') ?></a>  
                         <a class="dock-item" href="/customers/index"><span>Clientes</span><?php echo $this->Html->image('dock/customer.png') ?></a>  
+                        <a class="dock-item" href="/products/index"><span>Produtos</span><?php echo $this->Html->image('dock/product-icon.png') ?></a>  
+                        <a class="dock-item" href="/stocks/index"><span>Produtos</span><?php echo $this->Html->image('dock/stock.png') ?></a>  
                         <a class="dock-item" href="/orders/index"><span>Pedidos</span><?php echo $this->Html->image('dock/cart.png') ?></a>  
                     </div>  
                     <!-- end div .dock-container -->  
