@@ -84,21 +84,21 @@ class OrdersController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
-		$this->Order->id = $id;
-		if (!$this->Order->exists()) {
-			throw new NotFoundException(__('Invalid order'));
-		}
-		if ($this->Order->delete()) {
-			$this->Session->setFlash(__('Order deleted'));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Order was not deleted'));
-		$this->redirect(array('action' => 'index'));
-	}
+//	public function delete($id = null) {
+//		if (!$this->request->is('post')) {
+//			throw new MethodNotAllowedException();
+//		}
+//		$this->Order->id = $id;
+//		if (!$this->Order->exists()) {
+//			throw new NotFoundException(__('Invalid order'));
+//		}
+//		if ($this->Order->delete()) {
+//			$this->Session->setFlash(__('Order deleted'));
+//			$this->redirect(array('action' => 'index'));
+//		}
+//		$this->Session->setFlash(__('Order was not deleted'));
+//		$this->redirect(array('action' => 'index'));
+//	}
         
         public function new_item(){
             $this->layout = 'ajax';
@@ -138,8 +138,22 @@ class OrdersController extends AppController {
                 $template = str_replace('[OBS]', $order['Customer']['observacoes'], $template);
 
                 $this->set('template', $template);
-                
-                
-                
+        }
+        
+        public function cancel($id =null)
+        {
+            if (!$this->request->is('post')) {
+                    throw new MethodNotAllowedException();
+            }
+            $this->Order->id = $id;
+            if (!$this->Order->exists()) {
+                    throw new NotFoundException(__('Invalid order'));
+            }
+            if ($this->Order->delete()) {
+                    $this->Session->setFlash(__('Order deleted'));
+                    $this->redirect(array('action' => 'index'));
+            }
+            $this->Session->setFlash(__('Order was not deleted'));
+            $this->redirect(array('action' => 'index'));       
         }
 }

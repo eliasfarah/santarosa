@@ -25,8 +25,8 @@
 		<td><?php echo h($order['Order']['entregue']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $order['Order']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $order['Order']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $order['Order']['id']), null, __('Are you sure you want to delete # %s?', $order['Order']['id'])); ?>
+                        <?php echo $this->Html->link(__('Print'), array('action' => 'print_order', $order['Order']['id'])); ?>
+                        <?php echo $this->Html->link(__('Cancel'), array('action' => 'cancel', $order['Order']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
