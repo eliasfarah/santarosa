@@ -1,5 +1,7 @@
 <?php
+
 App::uses('AppController', 'Controller');
+
 /**
  * Products Controller
  *
@@ -7,96 +9,105 @@ App::uses('AppController', 'Controller');
  */
 class ProductsController extends AppController {
 
+    /**
+     * index method
+     *
+     * @return void
+     */
+    public function index() {
+        $conditions = array();
+        $data = empty($this->request->data) ? $this->request->params['named'] : $this->request->data;
+        if (!empty($data)) {
+            $conditions = array('OR' => array('Product.nome ilike' => '%' . $data['search'] . '%',
+                    'Manufacturer.nome ilike' => '%' . $data['search'] . '%',
+                    'ProductType.tipo ilike' => '%' . $data['search'] . '%'
+                )
+            );
+        }
+        $this->set('products', $this->paginate('Product', $conditions));
+        $this->set('args', $data);
+    }
 
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->Product->recursive = 0;
-		$this->set('products', $this->paginate());
-	}
+    /**
+     * view method
+     *
+     * @param string $id
+     * @return void
+     */
+    public function view($id = null) {
+        $this->Product->id = $id;
+        if (!$this->Product->exists()) {
+            throw new NotFoundException(__('Invalid product'));
+        }
+        $this->set('product', $this->Product->read(null, $id));
+    }
 
-/**
- * view method
- *
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		$this->Product->id = $id;
-		if (!$this->Product->exists()) {
-			throw new NotFoundException(__('Invalid product'));
-		}
-		$this->set('product', $this->Product->read(null, $id));
-	}
+    /**
+     * add method
+     *
+     * @return void
+     */
+    public function add() {
+        if ($this->request->is('post')) {
+            $this->Product->create();
+            if ($this->Product->save($this->request->data)) {
+                $this->Session->setFlash(__('The product has been saved'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The product could not be saved. Please, try again.'));
+            }
+        }
+        $manufacturers = $this->Product->Manufacturer->find('list', array('fields' => array('Manufacturer.id', 'Manufacturer.nome')));
+        $productTypes = $this->Product->ProductType->find('list', array('fields' => array('ProductType.id', 'ProductType.tipo')));
+        $this->set(compact('manufacturers', 'productTypes'));
+    }
 
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Product->create();
-			if ($this->Product->save($this->request->data)) {
-				$this->Session->setFlash(__('The product has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The product could not be saved. Please, try again.'));
-			}
-		}
-		$manufacturers = $this->Product->Manufacturer->find('list', array('fields'=>array('Manufacturer.id','Manufacturer.nome')));
-		$productTypes = $this->Product->ProductType->find('list', array('fields'=>array('ProductType.id','ProductType.tipo')));
-		$this->set(compact('manufacturers', 'productTypes'));
-	}
+    /**
+     * edit method
+     *
+     * @param string $id
+     * @return void
+     */
+    public function edit($id = null) {
+        $this->Product->id = $id;
+        if (!$this->Product->exists()) {
+            throw new NotFoundException(__('Invalid product'));
+        }
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if ($this->Product->save($this->request->data)) {
+                $this->Session->setFlash(__('The product has been saved'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The product could not be saved. Please, try again.'));
+            }
+        } else {
+            $this->request->data = $this->Product->read(null, $id);
+        }
+        $manufacturers = $this->Product->Manufacturer->find('list');
+        $productTypes = $this->Product->ProductType->find('list');
+        $this->set(compact('manufacturers', 'productTypes'));
+    }
 
-/**
- * edit method
- *
- * @param string $id
- * @return void
- */
-	public function edit($id = null) {
-		$this->Product->id = $id;
-		if (!$this->Product->exists()) {
-			throw new NotFoundException(__('Invalid product'));
-		}
-		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Product->save($this->request->data)) {
-				$this->Session->setFlash(__('The product has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The product could not be saved. Please, try again.'));
-			}
-		} else {
-			$this->request->data = $this->Product->read(null, $id);
-		}
-		$manufacturers = $this->Product->Manufacturer->find('list');
-		$productTypes = $this->Product->ProductType->find('list');
-		$this->set(compact('manufacturers', 'productTypes'));
-	}
+    /**
+     * delete method
+     *
+     * @param string $id
+     * @return void
+     */
+    public function delete($id = null) {
+        if (!$this->request->is('post')) {
+            throw new MethodNotAllowedException();
+        }
+        $this->Product->id = $id;
+        if (!$this->Product->exists()) {
+            throw new NotFoundException(__('Invalid product'));
+        }
+        if ($this->Product->delete()) {
+            $this->Session->setFlash(__('Product deleted'));
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->Session->setFlash(__('Product was not deleted'));
+        $this->redirect(array('action' => 'index'));
+    }
 
-/**
- * delete method
- *
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
-		$this->Product->id = $id;
-		if (!$this->Product->exists()) {
-			throw new NotFoundException(__('Invalid product'));
-		}
-		if ($this->Product->delete()) {
-			$this->Session->setFlash(__('Product deleted'));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Product was not deleted'));
-		$this->redirect(array('action' => 'index'));
-	}
 }

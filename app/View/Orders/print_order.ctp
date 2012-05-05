@@ -7,11 +7,19 @@
         font-size: 12px;
         font-family: Arial;
     }
+    .cancelado{
+        position: absolute;
+        left: 10%;
+        top: 20%;
+        opacity:0.25;
+	-moz-opacity: 0.25;
+	filter: alpha(opacity=25);
+    }
 </style>
 <div id="cabecalho_cliente">
     <?php echo $template ?>
 </div>
-<div id="pedido">
+<div id="pedido">    
     <fieldset style="width:500px;">
         <legend><b>Dados do pedido</b></legend>
         <table>
@@ -70,4 +78,12 @@
             </tbody>
         </table>
     </fieldset>   
+    <?php if(!empty($order['Order']['motivo_cancelamento'])): ?>       
+    <fieldset style="width:500px;">
+        <legend>Cancelamento</legend>
+        <b>Data: </b><?php echo date('d/m/Y H:i', strtotime($order['Order']['modified'])); ?><br />
+        <b>Motivo: </b><?php echo $order['Order']['motivo_cancelamento']; ?>
+    </fieldset>
+    <?php endif; ?>
 </div>
+<?php echo $order['Order']['cancelado']?$this->Html->image('cancelado.png', array('class'=>'cancelado')):''?>

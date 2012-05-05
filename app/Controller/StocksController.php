@@ -8,15 +8,25 @@ App::uses('AppController', 'Controller');
  * @property Stock $Stock
  */
 class StocksController extends AppController {
-
+   // public $paginate = array('contain'=>array('Product'=> array('Manufacturer'),'Color','ProductType'));
     /**
      * index method
      *
      * @return void
      */
-    public function index() {
-        $this->Stock->recursive = 0;
-        $this->set('stocks', $this->paginate());
+    public function index() {                
+        $conditions = array();
+        $data = empty($this->request->data)?$this->request->params['named']:$this->request->data;
+        if(!empty($data))
+        {   $conditions = array('OR'=>array('Product.nome ilike'=>'%'.$data['search'].'%',
+                                            'Manufacturer.nome ilike'=>'%'.$data['search'].'%',
+                                            'ProductType.tipo ilike'=>'%'.$data['search'].'%'
+                                           )
+                               );            
+        }    
+        $this->set('stocks', $this->paginate('Stock', $conditions));
+        $this->set('args', $data);
+        
     }
 
     /**
