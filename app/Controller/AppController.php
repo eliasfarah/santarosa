@@ -33,4 +33,12 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
     public $helpers = array('Js' => array('Jquery'),'Form','Session','Html', 'Ui');
+    
+     public $components = array(
+        'Session',
+        'Auth' => array(
+            'loginRedirect' => array('controller' => 'dashboard', 'action' => 'index'),
+            'logoutRedirect' => array('controller' => 'users', 'action' => 'login')
+        )
+    );
 }
