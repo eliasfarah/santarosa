@@ -5,7 +5,7 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('nome');
-		echo $this->Form->input('data_nascimento');
+		echo $this->Form->input('data_nascimento', array('minYear'=> (date('Y')-115), 'maxYear'=> (date('Y')-15) ));
 		echo $this->Form->input('endereco');
 		echo $this->Form->input('numero');
 		echo $this->Form->input('complemento');

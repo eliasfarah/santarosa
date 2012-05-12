@@ -28,7 +28,7 @@
                 <td>
                     <?php echo $this->Html->link($order['Customer']['nome'], array('controller' => 'customers', 'action' => 'view', $order['Customer']['id'])); ?>
                 </td>
-                <td><?php echo h($order['Order']['data_hora']); ?>&nbsp;</td>
+                <td><?php echo h(date('d/m/Y H:i', strtotime($order['Order']['data_hora']))); ?>&nbsp;</td>
                 <td><?php echo h($order['Order']['total']); ?>&nbsp;</td>
                 <td><?php echo h($order['Order']['desconto']); ?>&nbsp;</td>
                 <td><?php echo h($order['Order']['subtotal']); ?>&nbsp;</td>

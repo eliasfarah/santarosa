@@ -2,21 +2,15 @@
 	<h2><?php echo __('Manufacturers');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('nome');?></th>
 			<th><?php echo $this->Paginator->sort('telefone');?></th>
-			<th><?php echo $this->Paginator->sort('created');?></th>
-			<th><?php echo $this->Paginator->sort('modified');?></th>
 			<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
 	<?php
 	foreach ($manufacturers as $manufacturer): ?>
 	<tr>
-		<td><?php echo h($manufacturer['Manufacturer']['id']); ?>&nbsp;</td>
 		<td><?php echo h($manufacturer['Manufacturer']['nome']); ?>&nbsp;</td>
 		<td><?php echo h($manufacturer['Manufacturer']['telefone']); ?>&nbsp;</td>
-		<td><?php echo h($manufacturer['Manufacturer']['created']); ?>&nbsp;</td>
-		<td><?php echo h($manufacturer['Manufacturer']['modified']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $manufacturer['Manufacturer']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $manufacturer['Manufacturer']['id'])); ?>
