@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Application level Controller
  *
@@ -19,7 +20,6 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-
 App::uses('Controller', 'Controller');
 
 /**
@@ -32,13 +32,19 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-    public $helpers = array('Js' => array('Jquery'),'Form','Session','Html', 'Ui');
-    
-     public $components = array(
+
+    public $helpers = array('Js' => array('Jquery'), 'Form', 'Session', 'Html', 'Ui');
+    public $components = array(
+        'Auth',
         'Session',
-        'Auth' => array(
-            'loginRedirect' => array('controller' => 'dashboard', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => 'users', 'action' => 'login')
-        )
+        'FastAcl'
     );
+
+    public function beforeFilter() {
+//        $this->Auth->allow('*');
+        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+        $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
+        $this->Auth->loginRedirect = array('controller' => 'dashboard', 'action' => 'index');
+    }
+
 }

@@ -1,10 +1,10 @@
 <?php
-App::uses('UsersController', 'Controller');
+App::uses('GroupsController', 'Controller');
 
 /**
- * TestUsersController *
+ * TestGroupsController *
  */
-class TestUsersController extends UsersController {
+class TestGroupsController extends GroupsController {
 /**
  * Auto render
  *
@@ -26,16 +26,16 @@ class TestUsersController extends UsersController {
 }
 
 /**
- * UsersController Test Case
+ * GroupsController Test Case
  *
  */
-class UsersControllerTestCase extends CakeTestCase {
+class GroupsControllerTestCase extends CakeTestCase {
 /**
  * Fixtures
  *
  * @var array
  */
-	public $fixtures = array('app.user', 'app.group');
+	public $fixtures = array('app.group', 'app.user', 'app.role');
 
 /**
  * setUp method
@@ -44,8 +44,8 @@ class UsersControllerTestCase extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->Users = new TestUsersController();
-		$this->Users->constructClasses();
+		$this->Groups = new TestGroupsController();
+		$this->Groups->constructClasses();
 	}
 
 /**
@@ -54,7 +54,7 @@ class UsersControllerTestCase extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->Users);
+		unset($this->Groups);
 
 		parent::tearDown();
 	}

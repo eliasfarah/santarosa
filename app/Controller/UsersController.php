@@ -11,7 +11,6 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('login'); // Letting users register themselves
     }
 
     public function login() {
@@ -19,13 +18,13 @@ class UsersController extends AppController {
             if ($this->Auth->login()) {
                 $this->redirect($this->Auth->redirect());
             } else {
-                $this->Session->setFlash(__('Invalid username or password, try again'));
+                $this->Session->setFlash('Your username or password was incorrect.');
             }
         }
     }
 
     public function logout() {
-        $this->redirect($this->Auth->logout());
+        //Leave empty for now.
     }
 
     /**
@@ -67,8 +66,8 @@ class UsersController extends AppController {
                 $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
             }
         }
-        $roles = $this->User->Role->find('list');
-        $this->set(compact('roles'));
+        $groups = $this->User->Group->find('list');
+        $this->set(compact('groups'));
     }
 
     /**
@@ -92,8 +91,8 @@ class UsersController extends AppController {
         } else {
             $this->request->data = $this->User->read(null, $id);
         }
-        $roles = $this->User->Role->find('list');
-        $this->set(compact('roles'));
+        $groups = $this->User->Group->find('list');
+        $this->set(compact('groups'));
     }
 
     /**
@@ -117,5 +116,4 @@ class UsersController extends AppController {
         $this->Session->setFlash(__('User was not deleted'));
         $this->redirect(array('action' => 'index'));
     }
-
 }

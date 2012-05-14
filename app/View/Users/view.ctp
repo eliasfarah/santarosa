@@ -31,9 +31,9 @@
 			<?php echo h($user['User']['modified']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Role'); ?></dt>
+		<dt><?php echo __('Group'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($user['Role']['name'], array('controller' => 'roles', 'action' => 'view', $user['Role']['id'])); ?>
+			<?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'view', $user['Group']['id'])); ?>
 			&nbsp;
 		</dd>
 	</dl>
@@ -45,7 +45,7 @@
 		<li><?php echo $this->Form->postLink(__('Delete User'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Roles'), array('controller' => 'roles', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Role'), array('controller' => 'roles', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Groups'), array('controller' => 'groups', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Group'), array('controller' => 'groups', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
