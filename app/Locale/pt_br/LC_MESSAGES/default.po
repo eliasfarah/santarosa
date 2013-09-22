@@ -1932,6 +1932,9 @@ msgstr "Relacionados ao estoque"
 
 #: Customers
 
+msgid "Customers"
+msgstr "Clientes"
+
 msgid "Add Customer"
 msgstr "Adicionar Cliente"
 
@@ -1961,6 +1964,9 @@ msgstr "Apagar cliente"
 
 #: Manufacturers
 
+msgid "Manufacturers"
+msgstr "Fábricas"
+
 msgid "Add Manufacturer"
 msgstr "Adicionar Fábrica"
 
@@ -1987,6 +1993,9 @@ msgstr "Apagar Fábrica"
 
 #: Orders
 
+msgid "Orders"
+msgstr "Pedidos"
+
 msgid "Order"
 msgstr "Pedido"
 
@@ -2011,6 +2020,12 @@ msgstr "Apagar Pedido"
 
 #: Products
 
+msgid "Stocks"
+msgstr "Estoque"
+
+msgid "Products"
+msgstr "Produtos"
+
 msgid "Product"
 msgstr "Produto"
 
@@ -2030,6 +2045,9 @@ msgid "Delete Product"
 msgstr "Apagar Produto"
 
 #: Products Types
+
+msgid "Products"
+msgstr "Produtos"
 
 msgid "Product Types"
 msgstr "Tipo de Produto"
