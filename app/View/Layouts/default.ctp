@@ -58,7 +58,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
     <body>
         <div id="container">
             <div id="header">
-                <h1>Móveis Santa Rosa</h1>
+                <h1>Gest&atilde;o de Estoque</h1>
                 <!-- BEGIN DOCK 1 ============================================================ -->
                 <div id="dock">  
                     <div class="dock-container">  

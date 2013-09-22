@@ -37,7 +37,7 @@
                 <td class="actions">
                     <?php echo $this->Html->link(__('View'), array('action' => 'view', $order['Order']['id'])); ?>
                     <?php echo $this->Html->link(__('Print'), array('action' => 'print_order', $order['Order']['id']), array('target' => '_blank')); ?>
-                    <?php if(!$order['Order']['cancelado']){ echo ($order['Order']['entregue']=='')? $this->Form->postLink('Sent', array('action' => 'sent', $order['Order']['id']), array('confirm' => 'Realmente entregue?')):''; } ?>
+                    <?php if(!$order['Order']['cancelado']){ echo ($order['Order']['entregue']=='')? $this->Form->postLink(__('Sent'), array('action' => 'sent', $order['Order']['id']), array('confirm' => 'Realmente entregue?')):''; } ?>
                     <?php echo $order['Order']['cancelado'] ? '' : $this->Html->link(__('Cancel'), array('action' => 'cancel', $order['Order']['id'])); ?>
                 </td>
             </tr>

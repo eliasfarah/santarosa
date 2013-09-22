@@ -34,17 +34,5 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
     public $helpers = array('Js' => array('Jquery'), 'Form', 'Session', 'Html', 'Ui');
-    public $components = array(
-        'Auth',
-        'Session',
-        'FastAcl'
-    );
-
-    public function beforeFilter() {
-//        $this->Auth->allow('*');
-        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
-        $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
-        $this->Auth->loginRedirect = array('controller' => 'dashboard', 'action' => 'index');
-    }
 
 }

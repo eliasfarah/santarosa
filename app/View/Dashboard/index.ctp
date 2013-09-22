@@ -1,4 +1,3 @@
-<?php debug($sold) ?>
 <div style="width: 1000px;">   
     <div id="entregas" style="width: 500px; float:left;">
         <h1 align="center">Últimos Pedidos</h1>

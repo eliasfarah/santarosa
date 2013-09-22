@@ -83,8 +83,8 @@ class ProductsController extends AppController {
         } else {
             $this->request->data = $this->Product->read(null, $id);
         }
-        $manufacturers = $this->Product->Manufacturer->find('list');
-        $productTypes = $this->Product->ProductType->find('list');
+        $manufacturers = $this->Product->Manufacturer->find('list', array('fields'=>array('Manufacturer.id','Manufacturer.nome')));
+        $productTypes = $this->Product->ProductType->find('list', array('fields'=>array('ProductType.id','ProductType.tipo')));
         $this->set(compact('manufacturers', 'productTypes'));
     }
 
